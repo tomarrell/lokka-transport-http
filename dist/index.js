@@ -33,10 +33,6 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _promise = require('babel-runtime/core-js/promise');
-
-var _promise2 = _interopRequireDefault(_promise);
-
 var _transport = require('lokka/transport');
 
 var _transport2 = _interopRequireDefault(_transport);
@@ -47,17 +43,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // Technically, this should be handle by 'isomorphic-fetch'.
 // But it's not happening. So this is the fix
 
-var isNode = new Function('try {return this===global;}catch(e){return false;}'); /* global fetch */
+var fetchUrl = void 0; /* global fetch */
 
-
-var fetchUrl = void 0;
 if (typeof fetch === 'function') {
   // has a native fetch implementation
   fetchUrl = fetch;
-} else if (isNode()) {
-  // for Node.js
-  fetchUrl = require('node-fetch');
-  fetchUrl.Promise = _promise2.default;
 } else {
   // for the browser
   require('whatwg-fetch');
